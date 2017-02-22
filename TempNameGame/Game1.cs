@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.State;
+using TempNameGame.State.GameStates;
 
 namespace TempNameGame
 {
@@ -10,13 +12,31 @@ namespace TempNameGame
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager _graphics;
-        SpriteBatch _spriteBatch;
+        private GraphicsDeviceManager _graphics;
+
+        private GameStateManager _gameStateManager;
+        private ITitleScreenState _titleScreenState;
+
+        public SpriteBatch SpriteBatch { get; private set; }
+
+        public static Rectangle ScreenRectangle { get; private set; }
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            ScreenRectangle = new Rectangle(0, 0, 1280, 720);
+
+            _graphics.PreferredBackBufferWidth = ScreenRectangle.Width;
+            _graphics.PreferredBackBufferHeight = ScreenRectangle.Height;
+
+            _gameStateManager = new GameStateManager(this);
+            Components.Add(_gameStateManager);
+
+            _titleScreenState = new TitleScreenState(this);
+
+            _gameStateManager.ChangeState((TitleScreenState)_titleScreenState, PlayerIndex.One);
         }
 
         /// <summary>
@@ -38,10 +58,7 @@ namespace TempNameGame
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -50,7 +67,6 @@ namespace TempNameGame
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
