@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,12 +10,13 @@ namespace TempNameGame
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+        private GameState gameState;
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -38,7 +40,7 @@ namespace TempNameGame
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -59,12 +61,44 @@ namespace TempNameGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
+            switch (gameState)
+            {
+                case GameState.MainMenu:
+                    UpdateMainMenu(gameTime);
+                    break;
+                case GameState.WorldMap:
+                    UpdateWorldMap(gameTime);
+                    break;
+                case GameState.BattleMap:
+                    UpdateBattleMap(gameTime);
+                    break;
+                case GameState.CombatScreen:
+                    UpdateCombatScreen(gameTime);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected void UpdateMainMenu(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected void UpdateWorldMap(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected void UpdateBattleMap(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected void UpdateCombatScreen(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -73,11 +107,52 @@ namespace TempNameGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+            switch (gameState)
+            {
+                case GameState.BattleMap:
+                    DrawBattleMap(gameTime);
+                    break;
+                case GameState.CombatScreen:
+                    DrawCombatScreen(gameTime);
+                    break;
+                case GameState.MainMenu:
+                    DrawMainMenu(gameTime);
+                    break;
+                case GameState.WorldMap:
+                    DrawWorldMap(gameTime);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void DrawWorldMap(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void DrawMainMenu(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void DrawCombatScreen(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void DrawBattleMap(GameTime gameTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private enum GameState
+        {
+            MainMenu,
+            WorldMap,
+            BattleMap,
+            CombatScreen
         }
     }
 }
