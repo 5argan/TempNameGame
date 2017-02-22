@@ -12,7 +12,6 @@ namespace TempNameGame
     {
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
-        private GameState gameState;
 
         public Game1()
         {
@@ -62,23 +61,6 @@ namespace TempNameGame
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            switch (gameState)
-            {
-                case GameState.MainMenu:
-                    UpdateMainMenu(gameTime);
-                    break;
-                case GameState.WorldMap:
-                    UpdateWorldMap(gameTime);
-                    break;
-                case GameState.BattleMap:
-                    UpdateBattleMap(gameTime);
-                    break;
-                case GameState.CombatScreen:
-                    UpdateCombatScreen(gameTime);
-                    break;
-                default:
-                    break;
-            }
         }
 
         protected void UpdateMainMenu(GameTime gameTime)
@@ -108,23 +90,6 @@ namespace TempNameGame
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            switch (gameState)
-            {
-                case GameState.BattleMap:
-                    DrawBattleMap(gameTime);
-                    break;
-                case GameState.CombatScreen:
-                    DrawCombatScreen(gameTime);
-                    break;
-                case GameState.MainMenu:
-                    DrawMainMenu(gameTime);
-                    break;
-                case GameState.WorldMap:
-                    DrawWorldMap(gameTime);
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void DrawWorldMap(GameTime gameTime)
@@ -145,14 +110,6 @@ namespace TempNameGame
         private void DrawBattleMap(GameTime gameTime)
         {
             throw new System.NotImplementedException();
-        }
-
-        private enum GameState
-        {
-            MainMenu,
-            WorldMap,
-            BattleMap,
-            CombatScreen
         }
     }
 }
