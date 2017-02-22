@@ -79,26 +79,6 @@ namespace TempNameGame
             base.Update(gameTime);
         }
 
-        protected void UpdateMainMenu(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected void UpdateWorldMap(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected void UpdateBattleMap(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        protected void UpdateCombatScreen(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -106,26 +86,6 @@ namespace TempNameGame
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-        }
-
-        private void DrawWorldMap(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void DrawMainMenu(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void DrawCombatScreen(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        private void DrawBattleMap(GameTime gameTime)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }
