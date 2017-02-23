@@ -12,9 +12,8 @@ namespace TempNameGame
         private bool _gender;
         private string _mapName;
         private Point _tile;
-        private AnimatedSprite _sprite;
+        private readonly AnimatedSprite _sprite;
         private Texture2D _texture;
-        private float Speed { get; set; } = 180f;
         private Vector2 _position;
 
         public Vector2 Position
@@ -22,6 +21,8 @@ namespace TempNameGame
             get { return _sprite.Position; }
             set { _sprite.Position = value; }
         }
+
+        public float Speed { get; set; } = 180f;
 
         public AnimatedSprite Sprite => _sprite;
 

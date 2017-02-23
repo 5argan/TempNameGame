@@ -17,6 +17,7 @@ namespace TempNameGame.State.GameStates
         Engine _engine = new Engine(Game1.ScreenRectangle, 64, 64);
         private TileMap _map;
         private Camera _camera;
+        private Player _player;
         public GamePlayState(Game game) : base(game)
         {
             game.Services.AddService(typeof(IGamePlayState), this);
@@ -29,28 +30,49 @@ namespace TempNameGame.State.GameStates
 
         protected override void LoadContent()
         {
-            
+            var spriteSheet = _content.Load<Texture2D>(@"PlayerSprites\maleplayer");
+            _player = new Player(_game, "Wesley", false, spriteSheet);
         }
 
         public override void Update(GameTime gameTime)
         {
             var motion = Vector2.Zero;
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.W))
-                motion.Y -=1;
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.S))
-                motion.Y += 1;
+
             if (InputHandler.KeyboardState.IsKeyDown(Keys.A))
+            {
                 motion.X -= 1;
+                _player.Sprite.CurrentAnimation = AnimationKey.WalkLeft;
+            }
             if (InputHandler.KeyboardState.IsKeyDown(Keys.D))
+            {
                 motion.X += 1;
+                _player.Sprite.CurrentAnimation = AnimationKey.WalkRight;
+            }
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.W))
+            {
+                motion.Y -= 1;
+                _player.Sprite.CurrentAnimation = AnimationKey.WalkLeft;
+            }
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.S))
+            {
+                motion.Y += 1;
+                _player.Sprite.CurrentAnimation = AnimationKey.WalkDown;
+            }
+
 
             if (motion != Vector2.Zero)
             {
                 motion.Normalize();
-                motion *= _camera.Speed;
-                _camera.Position += motion;
-                _camera.LockCamera(_map, Game1.ScreenRectangle);
+                motion *= (_player.Speed*(float) gameTime.ElapsedGameTime.TotalSeconds);
+                var newPosition = _player.Sprite.Position + motion;
+
+                _player.Sprite.Position = newPosition;
+                _player.Sprite.IsAnimating = true;
+                _player.Sprite.LockToMap(new Point(_map.WidthInPixels, _map.HeightInPixels));
             }
+
+            _camera.LockToSprite(_map, _player.Sprite, Game1.ScreenRectangle);
+            _player.Sprite.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -61,6 +83,10 @@ namespace TempNameGame.State.GameStates
 
             if (_map != null && _camera != null)
                 _map.Draw(gameTime, _game.SpriteBatch, _camera);
+
+            _game.SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, _camera.Transformation);
+            _player.Sprite.Draw(gameTime, _game.SpriteBatch);
+            _game.SpriteBatch.End();
         }
 
         public void SetUpNewGame()
