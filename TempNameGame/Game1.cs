@@ -16,27 +16,21 @@ namespace TempNameGame
         private GraphicsDeviceManager _graphics;
 
         private GameStateManager _gameStateManager;
-        private IIntroScreenState _introScreenState;
-        private IMainMenuState _mainMenuState;
+        private readonly IIntroScreenState _introScreenState;
+        private readonly IMainMenuState _mainMenuState;
+        private readonly IGamePlayState _gamePlayState;
 
         public SpriteBatch SpriteBatch { get; private set; }
 
         public static Rectangle ScreenRectangle { get; private set; }
 
-        public GameStateManager GameStateManager
-        {
-            get { return GameStateManager; }
-        }
+        public GameStateManager GameStateManager => GameStateManager;
 
-        public IIntroScreenState IntroScreenState
-        {
-            get { return _introScreenState;}
-        }
+        public IIntroScreenState IntroScreenState => _introScreenState;
 
-        public IMainMenuState MainMenuState
-        {
-            get { return _mainMenuState;  }
-        }
+        public IMainMenuState MainMenuState => _mainMenuState;
+
+        public IGamePlayState GamePlayState => _gamePlayState;
 
 
         public Game1()
@@ -52,10 +46,11 @@ namespace TempNameGame
             _gameStateManager = new GameStateManager(this);
             Components.Add(_gameStateManager);
 
-            this.IsMouseVisible = true;
+            IsMouseVisible = true;
 
             _introScreenState = new IntroScreenState(this);
             _mainMenuState = new MainMenuState(this);
+            _gamePlayState = new GamePlayState(this);
             
             _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
         }
