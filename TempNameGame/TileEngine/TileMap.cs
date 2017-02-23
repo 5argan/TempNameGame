@@ -7,8 +7,8 @@ namespace TempNameGame.TileEngine
 {
     public class TileMap
     {
-        [ContentSerializer] private int _mapWidth;
-        [ContentSerializer] private int _mapHeight;
+        [ContentSerializer] private readonly int _mapWidth;
+        [ContentSerializer] private readonly int _mapHeight;
 
         [ContentSerializer]
         public string MapName { get; private set; }
@@ -32,8 +32,8 @@ namespace TempNameGame.TileEngine
         public int MapHeight => _mapHeight;
 
         public Dictionary<string, Point> Characters { get; private set; }
-        public int WidthInPixels => MapWidth*Engine.TileWidth;
-        public int HeightInPixels => MapHeight*Engine.TileHeight;
+        public int WidthInPixels => MapWidth * Engine.TileWidth;
+        public int HeightInPixels => MapHeight * Engine.TileHeight;
 
         private TileMap()
         {

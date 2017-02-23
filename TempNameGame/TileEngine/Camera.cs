@@ -5,7 +5,13 @@ namespace TempNameGame.TileEngine
 {
     public class Camera
     {
-        public Vector2 Position { get; set; }
+        private Vector2 _position;
+
+        public Vector2 Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
         private float _speed;
 
         public float Speed
@@ -29,8 +35,8 @@ namespace TempNameGame.TileEngine
 
         public void LockCamera(TileMap map, Rectangle viewport)
         {
-            Position.X = MathHelper.Clamp(Position.X, 0, map.WidthInPixels - viewport.Width);
-            Position.Y = MathHelper.Clamp(Position.Y, 0, map.HeightInPixels - viewport.Height);
+            _position.X = MathHelper.Clamp(Position.X, 0, map.WidthInPixels - viewport.Width);
+            _position.Y = MathHelper.Clamp(Position.Y, 0, map.HeightInPixels - viewport.Height);
         }
     }
 }

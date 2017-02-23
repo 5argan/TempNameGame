@@ -92,15 +92,15 @@ namespace TempNameGame.TileEngine
             Engine.VectorToCell(camera.Position);
             _viewPoint = Engine.VectorToCell(
                 new Vector2(
-                    camera.Position.X + Engine.ViewportRectangle.Width,
-                    camera.Position.Y + Engine.ViewportRectangle.Height));
+                    camera.Position.X + Engine.ViewPortRectangle.Width,
+                    camera.Position.Y + Engine.ViewPortRectangle.Height));
 
             _min.X = Math.Max(0, _cameraPoint.X - 1);
             _min.Y = Math.Max(0, _cameraPoint.Y - 1);
             _max.X = Math.Min(_viewPoint.X + 1, Width);
             _max.Y = Math.Min(_viewPoint.Y + 1, Height);
 
-            _destination = new Rectangle(0, 0, Engine.TileWidht, Engine.TileHeight);
+            _destination = new Rectangle(0, 0, Engine.TileWidth, Engine.TileHeight);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
             for (var y = _min.Y; y < _max.Y; y++)
@@ -111,7 +111,7 @@ namespace TempNameGame.TileEngine
                     var tile = GetTile(x, y);
                     if (tile == -1) continue;
 
-                    _destination.X = x*Engine.TileWidht;
+                    _destination.X = x*Engine.TileWidth;
 
                     spriteBatch.Draw(tileSet.Texture, _destination, tileSet.SourceRectangles[tile], Color.White);
                 }
