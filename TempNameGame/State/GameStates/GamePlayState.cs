@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using TempNameGame.TileEngine;
 
 namespace TempNameGame.State.GameStates
@@ -37,11 +38,27 @@ namespace TempNameGame.State.GameStates
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
+
+            if (_map != null && _camera != null)
+                _map.Draw(gameTime, _game.SpriteBatch, _camera);
         }
 
         public void SetUpNewGame()
         {
-            throw new System.NotImplementedException();
+            var tiles = _game.Content.Load<Texture2D>(@"Tiles\tileset1");
+            var set = new TileSet(8, 8, 32, 32) {Texture = tiles};
+
+            var background = new TileLayer(200, 200);
+            var edge = new TileLayer(200, 200);
+            var building = new TileLayer(200, 200);
+            var decor = new TileLayer(200, 200);
+
+            _map = new TileMap(set, background, edge, building, decor, "test-map");
+            _map.FillEdges();
+            _map.FillBuilding();
+            _map.FillDecoration();
+
+            _camera = new Camera();
         }
 
         public void LoadExistingGame()
@@ -51,7 +68,6 @@ namespace TempNameGame.State.GameStates
 
         public void StartGame()
         {
-            throw new System.NotImplementedException();
         }
     }
 }
