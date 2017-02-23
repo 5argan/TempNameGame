@@ -51,6 +51,7 @@
     <Compile Include="State\IGameState.cs" />
     <Compile Include="State\IStateManager.cs" />
     <Compile Include="TileEngine\Camera.cs" />
+    <Compile Include="TileEngine\Engine.cs" />
     <Compile Include="TileEngine\TileLayer.cs" />
     <Compile Include="TileEngine\TileMap.cs" />
     <Compile Include="TileEngine\TileSet.cs" />
