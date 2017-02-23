@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using TempNameGame.Components;
 using TempNameGame.TileEngine;
 
 namespace TempNameGame.State.GameStates
@@ -32,6 +34,53 @@ namespace TempNameGame.State.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            var motion = Vector2.Zero;
+            //TODO simplify this
+            if (InputHandler.KeyboardState.IsKeyDown(Keys.W) && InputHandler.KeyboardState.IsKeyDown(Keys.A))
+            {
+                motion.X = -1;
+                motion.Y = -1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.W) && InputHandler.KeyboardState.IsKeyDown(Keys.D))
+            {
+                motion.X = 1;
+                motion.Y = -1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.S) && InputHandler.KeyboardState.IsKeyDown(Keys.A))
+            {
+                motion.X = -1;
+                motion.Y = 1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.S) && InputHandler.KeyboardState.IsKeyDown(Keys.D))
+            {
+                motion.X = 1;
+                motion.Y = 1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.W))
+            {
+                motion.Y = -1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.S))
+            {
+                motion.Y = 1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.A))
+            {
+                motion.X = -1;
+            }
+            else if (InputHandler.KeyboardState.IsKeyDown(Keys.D))
+            {
+                motion.X = 1;
+            }
+
+            if (motion != Vector2.Zero)
+            {
+                motion.Normalize();
+                motion *= _camera.Speed;
+                _camera.Position += motion;
+                _camera.LockCamera(_map, Game1.ScreenRectangle);
+            }
+
             base.Update(gameTime);
         }
 
