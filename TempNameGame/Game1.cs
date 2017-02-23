@@ -1,10 +1,12 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TempNameGame.Components;
 using TempNameGame.State;
 using TempNameGame.State.GameStates;
+using TempNameGame.TileEngine;
 
 namespace TempNameGame
 {
@@ -24,6 +26,7 @@ namespace TempNameGame
 
         public static Rectangle ScreenRectangle { get; private set; }
 
+        public Dictionary<AnimationKey, Animation> playerAnimations { get; } = new Dictionary<AnimationKey, Animation>();
         public GameStateManager GameStateManager => GameStateManager;
 
         public IIntroScreenState IntroScreenState => _introScreenState;
@@ -64,6 +67,16 @@ namespace TempNameGame
         protected override void Initialize()
         {
             Components.Add(new InputHandler(this));
+
+            var animation = new Animation(3, 32, 32, 0, 0);
+            playerAnimations.Add(AnimationKey.WalkDown, animation);
+            animation = new Animation(3, 32, 32, 0, 32);
+            playerAnimations.Add(AnimationKey.WalkLeft, animation);
+            animation = new Animation(3, 32, 32, 0, 64);
+            playerAnimations.Add(AnimationKey.WalkRight, animation);
+            animation = new Animation(3, 32, 32, 0, 96);
+            playerAnimations.Add(AnimationKey.WalkUp, animation);
+
             base.Initialize();
         }
 
