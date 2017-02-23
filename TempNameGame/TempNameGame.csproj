@@ -51,6 +51,7 @@
     <Compile Include="State\GameStates\MainMenuState.cs" />
     <Compile Include="State\IGameState.cs" />
     <Compile Include="State\IStateManager.cs" />
+    <Compile Include="TileEngine\AnimatedSprite.cs" />
     <Compile Include="TileEngine\Animation.cs" />
     <Compile Include="TileEngine\Camera.cs" />
     <Compile Include="TileEngine\Engine.cs" />
