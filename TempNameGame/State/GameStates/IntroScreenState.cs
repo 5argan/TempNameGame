@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using TempNameGame.Components;
 
 namespace TempNameGame.State.GameStates
 {
@@ -44,8 +46,13 @@ namespace TempNameGame.State.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            PlayerIndex? index = null;
             _elapsedTime += gameTime.ElapsedGameTime;
 
+            if (InputHandler.CheckKeyReleased(Keys.Space) || InputHandler.CheckKeyReleased(Keys.Enter) || InputHandler.CheckMouseReleased(MouseButton.Left))
+            {
+                _manager.ChangeState((MainMenuState)_game.MainMenuState, index);
+            }
             base.Update(gameTime);
         }
 

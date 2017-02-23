@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.Components;
 using TempNameGame.State;
 using TempNameGame.State.GameStates;
 
@@ -16,10 +17,27 @@ namespace TempNameGame
 
         private GameStateManager _gameStateManager;
         private IIntroScreenState _introScreenState;
+        private IMainMenuState _mainMenuState;
 
         public SpriteBatch SpriteBatch { get; private set; }
 
         public static Rectangle ScreenRectangle { get; private set; }
+
+        public GameStateManager GameStateManager
+        {
+            get { return GameStateManager; }
+        }
+
+        public IIntroScreenState IntroScreenState
+        {
+            get { return _introScreenState;}
+        }
+
+        public IMainMenuState MainMenuState
+        {
+            get { return _mainMenuState;  }
+        }
+
 
         public Game1()
         {
@@ -34,8 +52,11 @@ namespace TempNameGame
             _gameStateManager = new GameStateManager(this);
             Components.Add(_gameStateManager);
 
-            _introScreenState = new IntroScreenState(this);
+            this.IsMouseVisible = true;
 
+            _introScreenState = new IntroScreenState(this);
+            _mainMenuState = new MainMenuState(this);
+            
             _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
         }
 
@@ -47,8 +68,7 @@ namespace TempNameGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
+            Components.Add(new InputHandler(this));
             base.Initialize();
         }
 
@@ -85,6 +105,7 @@ namespace TempNameGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
             base.Draw(gameTime);
         }
     }
