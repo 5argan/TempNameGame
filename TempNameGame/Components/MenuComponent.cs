@@ -8,7 +8,7 @@ namespace TempNameGame.Components
 {
     public class MenuComponent
     {
-        private SpriteFont _spriteFont;
+        private readonly SpriteFont _spriteFont;
         private readonly List<string> _menuItems = new List<string>();
         private int _selectedIndex = -1;
 
@@ -18,7 +18,7 @@ namespace TempNameGame.Components
         public Color NormalColor { get; set; } = Color.White;
         public Color HighlightColor { get; set; } = Color.Red;
 
-        private Texture2D _texture;
+        private readonly Texture2D _texture;
 
         public Vector2 Position { get; set; }
 
@@ -78,7 +78,7 @@ namespace TempNameGame.Components
             Height -= 50;
         }
 
-        public void Update(GameTime gametime, PlayerIndex index)
+        public void Update(GameTime gametime, PlayerIndex? index)
         {
             var menuPosition = Position;
             var p = InputHandler.MouseState.Position;
