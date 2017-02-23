@@ -57,10 +57,18 @@ namespace TempNameGame.State.GameStates
                 if (_menuComponent.SelectedIndex == 0)
                 {
                     InputHandler.FlushInput();
+
+                    _game.GamePlayState.SetUpNewGame();
+                    _game.GamePlayState.StartGame();
+                    _manager.PushState((GamePlayState)_game.GamePlayState, _currentPlayerIndex);
                 }
                 else if (_menuComponent.SelectedIndex == 1)
                 {
                     InputHandler.FlushInput();
+
+                    _game.GamePlayState.LoadExistingGame();
+                    _game.GamePlayState.StartGame();
+                    _manager.PushState((GamePlayState)_game.GamePlayState, _currentPlayerIndex);
                 }
                 else if (_menuComponent.SelectedIndex == 2)
                 {
