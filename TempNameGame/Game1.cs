@@ -15,7 +15,7 @@ namespace TempNameGame
         private GraphicsDeviceManager _graphics;
 
         private GameStateManager _gameStateManager;
-        private ITitleScreenState _titleScreenState;
+        private IIntroScreenState _introScreenState;
 
         public SpriteBatch SpriteBatch { get; private set; }
 
@@ -34,9 +34,9 @@ namespace TempNameGame
             _gameStateManager = new GameStateManager(this);
             Components.Add(_gameStateManager);
 
-            _titleScreenState = new TitleScreenState(this);
+            _introScreenState = new IntroScreenState(this);
 
-            _gameStateManager.ChangeState((TitleScreenState)_titleScreenState, PlayerIndex.One);
+            _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
         }
 
         /// <summary>

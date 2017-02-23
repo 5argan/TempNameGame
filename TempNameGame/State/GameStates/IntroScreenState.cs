@@ -4,12 +4,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace TempNameGame.State.GameStates
 {
-    public interface ITitleScreenState : IGameState
+    public interface IIntroScreenState : IGameState
     {
         
     }
 
-    public class TitleScreenState : GameStateBase, ITitleScreenState
+    public class IntroScreenState : GameStateBase, IIntroScreenState
     {
         private Texture2D _background;
         private Rectangle _backgroundDestination;
@@ -17,9 +17,9 @@ namespace TempNameGame.State.GameStates
         private TimeSpan _elapsedTime;
         private Vector2 _position;
         private string _message;
-        public TitleScreenState(Game game) : base(game)
+        public IntroScreenState(Game game) : base(game)
         {
-            game.Services.AddService(typeof(ITitleScreenState), this);
+            game.Services.AddService(typeof(IIntroScreenState), this);
         }
 
         public override void Initialize()

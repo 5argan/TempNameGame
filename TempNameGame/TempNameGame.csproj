@@ -46,7 +46,7 @@
     <Compile Include="State\GameState.cs" />
     <Compile Include="State\GameStateManager.cs" />
     <Compile Include="State\GameStates\GameStateBase.cs" />
-    <Compile Include="State\GameStates\TitleScreenState.cs" />
+    <Compile Include="State\GameStates\IntroScreenState.cs" />
     <Compile Include="State\IGameState.cs" />
     <Compile Include="State\IStateManager.cs" />
   </ItemGroup>
