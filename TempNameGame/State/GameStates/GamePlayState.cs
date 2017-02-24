@@ -51,7 +51,7 @@ namespace TempNameGame.State.GameStates
             if (InputHandler.KeyboardState.IsKeyDown(Keys.W))
             {
                 motion.Y -= 1;
-                _player.Sprite.CurrentAnimation = AnimationKey.WalkLeft;
+                _player.Sprite.CurrentAnimation = AnimationKey.WalkUp;
             }
             if (InputHandler.KeyboardState.IsKeyDown(Keys.S))
             {
