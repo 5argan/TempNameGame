@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CharacterSprites\teacherone.png" />
+    <Content Include="Content\CharacterSprites\teachertwo.png" />
     <Content Include="Content\GameScreens\menuscreen.png" />
     <Content Include="Content\GameScreens\titlescreen.png" />
     <Content Include="Content\Misc\wooden-button.png" />
