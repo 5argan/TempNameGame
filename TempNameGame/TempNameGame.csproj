@@ -40,6 +40,9 @@
   <ItemGroup>
     <Compile Include="AvatarComponents\Avatar.cs" />
     <Compile Include="AvatarComponents\IMove.cs" />
+    <Compile Include="CharacterComponents\Character.cs" />
+    <Compile Include="CharacterComponents\ICharacter.cs" />
+    <Compile Include="CharacterComponents\PCharacter.cs" />
     <Compile Include="Components\InputHandler.cs" />
     <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="Game1.cs" />
