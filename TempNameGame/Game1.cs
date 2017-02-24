@@ -119,5 +119,6 @@ namespace TempNameGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
             base.Draw(gameTime);
         }
+
     }
 }

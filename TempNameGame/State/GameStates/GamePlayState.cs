@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.TileEngine;
 
@@ -103,6 +104,15 @@ namespace TempNameGame.State.GameStates
             _map.FillEdges();
             _map.FillBuilding();
             _map.FillDecoration();
+
+            var teacherOne = Character.FromString(_game, "Lance,teacherone,WalkDown,teacherone");
+            var teacherTwo = PCharacter.FromString(_game, "Marissa,teachertwo,WalkDown,teachertwo");
+
+            _game.CharacterManager.AddCharacter("teacherone", teacherOne);
+            _game.CharacterManager.AddCharacter("teachertwo", teacherTwo);
+
+            _map.Characters.Add("teacherone", new Point(0,4));
+            _map.Characters.Add("teachertwo", new Point(4, 0));
 
             _camera = new Camera();
         }
