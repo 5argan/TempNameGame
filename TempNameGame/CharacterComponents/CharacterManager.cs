@@ -2,7 +2,7 @@
 
 namespace TempNameGame.CharacterComponents
 {
-    public class CharacterManager
+    public sealed class CharacterManager
     {
         private readonly Dictionary<string, ICharacter> _characters = new Dictionary<string, ICharacter>();
         public static CharacterManager Instance { get; } = new CharacterManager();
