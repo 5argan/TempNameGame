@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.State;
 using TempNameGame.State.GameStates;
@@ -17,7 +18,9 @@ namespace TempNameGame
     {
         private GraphicsDeviceManager _graphics;
 
-        private GameStateManager _gameStateManager;
+        private readonly GameStateManager _gameStateManager;
+        private CharacterManager _characterManager;
+
         private readonly IIntroScreenState _introScreenState;
         private readonly IMainMenuState _mainMenuState;
         private readonly IGamePlayState _gamePlayState;
@@ -27,12 +30,11 @@ namespace TempNameGame
         public static Rectangle ScreenRectangle { get; private set; }
 
         public Dictionary<AnimationKey, Animation> playerAnimations { get; } = new Dictionary<AnimationKey, Animation>();
-        public GameStateManager GameStateManager => GameStateManager;
+        public GameStateManager GameStateManager => _gameStateManager;
+        public CharacterManager CharacterManager => _characterManager;
 
         public IIntroScreenState IntroScreenState => _introScreenState;
-
         public IMainMenuState MainMenuState => _mainMenuState;
-
         public IGamePlayState GamePlayState => _gamePlayState;
 
 
@@ -56,6 +58,7 @@ namespace TempNameGame
             _gamePlayState = new GamePlayState(this);
             
             _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
+            _characterManager = CharacterManager.Instance;
         }
 
         /// <summary>
@@ -68,13 +71,13 @@ namespace TempNameGame
         {
             Components.Add(new InputHandler(this));
 
-            var animation = new Animation(3, 32, 32, 0, 0);
+            var animation = new Animation(3, 64, 64, 0, 0);
             playerAnimations.Add(AnimationKey.WalkDown, animation);
-            animation = new Animation(3, 32, 32, 0, 32);
+            animation = new Animation(3, 64, 64, 0, 64);
             playerAnimations.Add(AnimationKey.WalkLeft, animation);
-            animation = new Animation(3, 32, 32, 0, 64);
+            animation = new Animation(3, 64, 64, 0, 128);
             playerAnimations.Add(AnimationKey.WalkRight, animation);
-            animation = new Animation(3, 32, 32, 0, 96);
+            animation = new Animation(3, 64, 64, 0, 192);
             playerAnimations.Add(AnimationKey.WalkUp, animation);
 
             base.Initialize();
