@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace TempNameGame.AvatarComponents
@@ -26,7 +27,7 @@ namespace TempNameGame.AvatarComponents
 
         public Texture2D Texture { get; private set; }
 
-        public Dictionary<string, IMove> KnownMoves { get; }
+        public Dictionary<string, IMove> KnownMoves { get; private set; }
 
         public AvatarElement Element { get; private set; }
 
@@ -347,6 +348,43 @@ namespace TempNameGame.AvatarComponents
             }
 
             return avatar;
+        }
+
+        public static Avatar FromString(string description, ContentManager content)
+        {
+            var parts = description.Split(',');
+            var avatar = new Avatar
+            {
+                Name = parts[0],
+                Texture = content.Load<Texture2D>(@"AvatarImages\" + parts[0]),
+                Element = (AvatarElement)Enum.Parse(typeof(AvatarElement), parts[1]),
+                _costToBuy = int.Parse(parts[2]),
+                Level = int.Parse(parts[3]),
+                BaseAttack = int.Parse(parts[4]),
+                BaseDefense = int.Parse(parts[5]),
+                BaseSpeed = int.Parse(parts[6]),
+                BaseHealth = int.Parse(parts[7]),
+                CurrentHealth = int.Parse(parts[7]),
+                KnownMoves = new Dictionary<string,IMove>()
+            };
+
+            for (var i = 8; i < parts.Length; i++)
+            {
+                var moveParts = parts[i].Split(':');
+                if (moveParts[0] == "None") continue;
+
+                var move = MoveManager.GetMove(moveParts[0]);
+                move.UnlockedAt = int.Parse(moveParts[1]);
+
+                if (move.UnlockedAt <= avatar.Level)
+                    move.Unlock();
+
+                avatar.KnownMoves.Add(move.Name, move);
+            }
+
+            return avatar;
+            
+
         }
     }
 }
