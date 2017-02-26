@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempNameGame", "TempNameGame\TempNameGame.csproj", "{17A430F2-C818-45EC-B2D3-A281E3FEDC09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsigneVictoriae", "InsigneVictoriae\InsigneVictoriae.csproj", "{CB5A6918-1FF4-4B5C-A797-7455F2E8F22C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +17,10 @@ Global
 		{17A430F2-C818-45EC-B2D3-A281E3FEDC09}.Debug|x86.Build.0 = Debug|x86
 		{17A430F2-C818-45EC-B2D3-A281E3FEDC09}.Release|x86.ActiveCfg = Release|x86
 		{17A430F2-C818-45EC-B2D3-A281E3FEDC09}.Release|x86.Build.0 = Release|x86
+		{CB5A6918-1FF4-4B5C-A797-7455F2E8F22C}.Debug|x86.ActiveCfg = Debug|x86
+		{CB5A6918-1FF4-4B5C-A797-7455F2E8F22C}.Debug|x86.Build.0 = Debug|x86
+		{CB5A6918-1FF4-4B5C-A797-7455F2E8F22C}.Release|x86.ActiveCfg = Release|x86
+		{CB5A6918-1FF4-4B5C-A797-7455F2E8F22C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
