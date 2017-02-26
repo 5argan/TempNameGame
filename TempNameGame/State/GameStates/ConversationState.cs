@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using TempNameGame.CharacterComponents;
+using TempNameGame.Components;
 using TempNameGame.ConversationComponents;
 
 namespace TempNameGame.State.GameStates
@@ -11,6 +13,7 @@ namespace TempNameGame.State.GameStates
         void SetConversation(Player player, ICharacter character);
         void StartConversation();
     }
+
     public class ConversationState : GameStateBase, IConversationState
     {
         private Conversation _conversation;
@@ -38,8 +41,35 @@ namespace TempNameGame.State.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            if (InputHandler.CheckKeyReleased(Keys.Space) || InputHandler.CheckKeyReleased(Keys.Enter))
+            {
+                switch (_conversation.CurrentScene.OptionAction.Action)
+                {
+                    case ActionType.Buy:
+                        break;
+                    case ActionType.Change:
+                        _speaker.SetConversation(_conversation.CurrentScene.OptionScene);
+                        _manager.PopState();
+                        break;
+                    case ActionType.End:
+                        _manager.PopState();
+                        break;
+                    case ActionType.GiveItems:
+                        break;
+                    case ActionType.GiveKey:
+                        break;
+                    case ActionType.Quest:
+                        break;
+                    case ActionType.Sell:
+                        break;
+                    case ActionType.Talk:
+                        _conversation.ChangeScene(_conversation.CurrentScene.OptionScene);
+                        break;
+                }
+            }
+
+            _conversation.Update(gameTime);
             base.Update(gameTime);
-            throw new NotImplementedException();
         }
 
         public override void Draw(GameTime gameTime)
@@ -66,7 +96,5 @@ namespace TempNameGame.State.GameStates
         {
             _conversation.StartConversation();
         }
-
-        
     }
 }
