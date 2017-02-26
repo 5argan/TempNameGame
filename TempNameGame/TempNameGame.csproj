@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="AvatarComponents\Avatar.cs" />
     <Compile Include="AvatarComponents\IMove.cs" />
+    <Compile Include="AvatarComponents\MoveManager.cs" />
     <Compile Include="CharacterComponents\Character.cs" />
     <Compile Include="CharacterComponents\CharacterManager.cs" />
     <Compile Include="CharacterComponents\ICharacter.cs" />
