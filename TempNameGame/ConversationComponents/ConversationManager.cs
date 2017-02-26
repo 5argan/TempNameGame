@@ -10,23 +10,23 @@ namespace TempNameGame.ConversationComponents
 {
     public class ConversationManager
     {
-        public static Dictionary<string, Conversation> ConversationList { get; private set; } = new Dictionary<string, Conversation>();
+        public static Dictionary<string, Conversation> ConversationList { get; private set; } =
+            new Dictionary<string, Conversation>();
 
         public ConversationManager()
         {
-            
         }
 
         public static void AddConversation(string name, Conversation conversation)
         {
-            if(!ConversationList.ContainsKey(name))
+            if (!ConversationList.ContainsKey(name))
                 ConversationList.Add(name, conversation);
         }
 
-        public static Conversation GetConversation(string name) => 
+        public static Conversation GetConversation(string name) =>
             ConversationList.ContainsKey(name) ? ConversationList[name] : null;
 
-        public static bool ContainsConversation(string name) => 
+        public static bool ContainsConversation(string name) =>
             ConversationList.ContainsKey(name);
 
 
@@ -92,7 +92,6 @@ namespace TempNameGame.ConversationComponents
                     }
 
                     conversation.AppendChild(scene);
-
                 }
                 root.AppendChild(conversation);
             }
@@ -184,12 +183,65 @@ namespace TempNameGame.ConversationComponents
             finally
             {
                 xmlDoc = null;
-            } 
+            }
         }
 
         public static void ClearConversations()
         {
             ConversationList = new Dictionary<string, Conversation>();
+        }
+
+        public static void CreateConversations(Game game)
+        {
+            var sceneTexture = game.Content.Load<Texture2D>(@"Scenes\scenebackground");
+            var sceneFont = game.Content.Load<SpriteFont>(@"Fonts\InterfaceFont");
+
+            var c = new Conversation("MarissaHello", "Hello", sceneTexture, sceneFont)
+            {
+                BackgroundName = "scenebackground",
+                FontName = "scenefont"
+            };
+
+            var options = new List<SceneOption>();
+            var option = new SceneOption("Good bye.", "",
+                new SceneAction {Action = ActionType.End, Parameter = "none"});
+            options.Add(option);
+
+            var scene = new GameScene(game, "Hello, my name is Marissa. I'm still learning about summoning avatars.",
+                options);
+            c.AddScene("Hello", scene);
+            ConversationList.Add("MarissaHello", c);
+
+            c = new Conversation("LanceHello", "Hello", sceneTexture, sceneFont)
+            {
+                BackgroundName = "scenebackground",
+                FontName = "scenefont"
+            };
+
+            options = new List<SceneOption>();
+            option = new SceneOption("Yes", "ILikeFire",
+                new SceneAction {Action = ActionType.Talk, Parameter = "non2"});
+            options.Add(option);
+
+            option = new SceneOption("No", "IDislikeFire",
+                new SceneAction {Action = ActionType.Talk, Parameter = "non2"});
+            options.Add(option);
+
+            scene = new GameScene(game, "Fire avatars are my favorites. Do you like fire type avatars too?", options);
+            c.AddScene("Hello", scene);
+            options = new List<SceneOption>();
+            option = new SceneOption("Good bye.", "", new SceneAction() {Action = ActionType.End, Parameter = "none"});
+            options.Add(option);
+
+            scene = new GameScene(game, "That's cool. I wouldn't want to hug one though.", options);
+            c.AddScene("ILikeFire", scene);
+            options = new List<SceneOption>();
+            option = new SceneOption("Good bye.", "", new SceneAction() {Action = ActionType.End, Parameter = "none"});
+            options.Add(option);
+
+            scene = new GameScene(game, "Each to their own I guess.", options);
+            c.AddScene("IDislikeFire", scene);
+            ConversationList.Add("LanceHello", c);
         }
     }
 }

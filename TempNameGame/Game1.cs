@@ -19,11 +19,12 @@ namespace TempNameGame
         private GraphicsDeviceManager _graphics;
 
         private readonly GameStateManager _gameStateManager;
-        private CharacterManager _characterManager;
+        private readonly CharacterManager _characterManager;
 
         private readonly IIntroScreenState _introScreenState;
         private readonly IMainMenuState _mainMenuState;
         private readonly IGamePlayState _gamePlayState;
+        private IConversationState _conversationState;
 
         public SpriteBatch SpriteBatch { get; private set; }
 
@@ -56,6 +57,7 @@ namespace TempNameGame
             _introScreenState = new IntroScreenState(this);
             _mainMenuState = new MainMenuState(this);
             _gamePlayState = new GamePlayState(this);
+            _conversationState = new ConversationState(this);
             
             _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
             _characterManager = CharacterManager.Instance;
