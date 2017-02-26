@@ -38,6 +38,7 @@ namespace TempNameGame.State.GameStates
         public override void Update(GameTime gameTime)
         {
             var motion = Vector2.Zero;
+            const int padding = 8;
 
             if (InputHandler.KeyboardState.IsKeyDown(Keys.A))
             {
@@ -64,12 +65,36 @@ namespace TempNameGame.State.GameStates
             if (motion != Vector2.Zero)
             {
                 motion.Normalize();
-                motion *= (_player.Speed*(float) gameTime.ElapsedGameTime.TotalSeconds);
+                motion *= _player.Speed*(float) gameTime.ElapsedGameTime.TotalSeconds;
+
+                var pRect = new Rectangle(
+                    (int) _player.Sprite.Position.X + (int) motion.X + padding,
+                    (int) _player.Sprite.Position.Y + (int) motion.Y + padding,
+                    Engine.TileWidth - padding,
+                    Engine.TileHeight - padding);
+
+                foreach (var key in _map.Characters.Keys)
+                {
+                    var r = new Rectangle(
+                        _map.Characters[key].X*Engine.TileWidth + padding,
+                        _map.Characters[key].Y*Engine.TileHeight + padding,
+                        Engine.TileWidth - padding,
+                        Engine.TileHeight - padding);
+
+                    if (!pRect.Intersects(r)) continue;
+                    motion = Vector2.Zero;
+                    break;
+                }
+
                 var newPosition = _player.Sprite.Position + motion;
 
                 _player.Sprite.Position = newPosition;
                 _player.Sprite.IsAnimating = true;
                 _player.Sprite.LockToMap(new Point(_map.WidthInPixels, _map.HeightInPixels));
+            }
+            else
+            {
+                _player.Sprite.IsAnimating = false;
             }
 
             _camera.LockToSprite(_map, _player.Sprite, Game1.ScreenRectangle);
