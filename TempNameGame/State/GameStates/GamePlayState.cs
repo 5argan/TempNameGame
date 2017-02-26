@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.AvatarComponents;
 using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.ConversationComponents;
@@ -34,8 +35,7 @@ namespace TempNameGame.State.GameStates
 
         protected override void LoadContent()
         {
-            var spriteSheet = _content.Load<Texture2D>(@"PlayerSprites\maleplayer");
-            _player = new Player(_game, "Wesley", false, spriteSheet);
+            
         }
 
         public override void Update(GameTime gameTime)
@@ -138,6 +138,11 @@ namespace TempNameGame.State.GameStates
 
         public void SetUpNewGame()
         {
+            var spriteSheet = _content.Load<Texture2D>(@"PlayerSprites\maleplayer");
+            _player = new Player(_game, "Wesley", false, spriteSheet);
+            _player.AddAvatar("fire", AvatarManager.GetAvatar("fire"));
+            _player.SetAvatar("fire");
+
             var tiles = _game.Content.Load<Texture2D>(@"Tiles\tileset1");
             var set = new TileSet(8, 8, 32, 32) {Texture = tiles};
 
