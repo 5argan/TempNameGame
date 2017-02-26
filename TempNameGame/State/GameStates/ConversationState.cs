@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.ConversationComponents;
+using TempNameGame.PlayerComponents;
 
 namespace TempNameGame.State.GameStates
 {

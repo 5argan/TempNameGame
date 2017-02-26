@@ -54,7 +54,8 @@
     <Compile Include="ConversationComponents\GameScene.cs" />
     <Compile Include="ConversationComponents\SceneOption.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="PlayerComponents\Player.cs" />
+    <Compile Include="PlayerComponents\PPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State\GameState.cs" />
