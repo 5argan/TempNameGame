@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using TempNameGame.CharacterComponents;
 
 namespace TempNameGame.TileEngine
 {
@@ -9,6 +10,8 @@ namespace TempNameGame.TileEngine
     {
         [ContentSerializer] private readonly int _mapWidth;
         [ContentSerializer] private readonly int _mapHeight;
+        
+        private readonly CharacterManager _characterManager;
 
         [ContentSerializer]
         public string MapName { get; private set; }
@@ -31,7 +34,7 @@ namespace TempNameGame.TileEngine
         public int MapWidth => _mapWidth;
         public int MapHeight => _mapHeight;
 
-        public Dictionary<string, Point> Characters { get; private set; }
+        public Dictionary<string, Point> Characters { get; }
         public int WidthInPixels => MapWidth * Engine.TileWidth;
         public int HeightInPixels => MapHeight * Engine.TileHeight;
 
@@ -39,11 +42,12 @@ namespace TempNameGame.TileEngine
         {
         }
 
-        private TileMap(TileSet tileSet, string mapName)
+        private TileMap(TileSet tileSet, string mapName) : this()
         {
             Characters = new Dictionary<string, Point>();
             TileSet = tileSet;
             MapName = mapName;
+            _characterManager = CharacterManager.Instance;
         }
 
         public TileMap(TileSet tileSet, TileLayer groundLayer, TileLayer edgeLayer, TileLayer buildingLayer,
@@ -133,6 +137,26 @@ namespace TempNameGame.TileEngine
             EdgeLayer?.Draw(gameTime, spriteBatch, TileSet, camera);
             BuildingLayer?.Draw(gameTime, spriteBatch, TileSet, camera);
             DecorationLayer?.Draw(gameTime, spriteBatch, TileSet, camera);
+
+            DrawCharacters(gameTime, spriteBatch, camera);
+        }
+
+        public void DrawCharacters(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
+        {
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
+
+            foreach (var key in Characters.Keys)
+            {
+                var c = _characterManager.GetCharacter(key);
+                if (c == null) continue;
+
+                c.Sprite.Position.X = Characters[key].X*Engine.TileWidth;
+                c.Sprite.Position.Y = Characters[key].Y*Engine.TileHeight;
+
+                c.Sprite.Draw(gameTime, spriteBatch);
+            }
+
+            spriteBatch.End();
         }
     }
 }
