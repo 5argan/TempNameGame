@@ -34,6 +34,8 @@ namespace TempNameGame.TileEngine
         public int Width => _animations[CurrentAnimation].FrameWidth;
         public int Height => _animations[CurrentAnimation].FrameHeight;
         public Vector2 Position;
+        public Vector2 Center => Position + new Vector2(Width/2, Height/2);
+
 
         public float Speed
         {
