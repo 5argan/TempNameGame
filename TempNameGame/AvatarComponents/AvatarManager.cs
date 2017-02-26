@@ -36,9 +36,9 @@ namespace TempNameGame.AvatarComponents
                                 if (lineIn == null) continue;
 
                                 var avatar = Avatar.FromString(lineIn, content);
-                                if (!AvatarList.ContainsKey(avatar.Name))
+                                if (!AvatarList.ContainsKey(avatar.Name.ToLowerInvariant()))
                                 {
-                                    AvatarList.Add(avatar.Name, avatar);
+                                    AvatarList.Add(avatar.Name.ToLowerInvariant(), avatar);
                                 }
                             } while (lineIn != null);
                         }
