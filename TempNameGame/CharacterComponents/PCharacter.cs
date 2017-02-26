@@ -32,7 +32,7 @@ namespace TempNameGame.CharacterComponents
 
         private static void BuildAnimations()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public static PCharacter FromString(Game game, string characterString)

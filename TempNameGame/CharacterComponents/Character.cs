@@ -28,7 +28,7 @@ namespace TempNameGame.CharacterComponents
 
         private static void BuildAnimations()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public static Character FromString(Game game, string characterString)

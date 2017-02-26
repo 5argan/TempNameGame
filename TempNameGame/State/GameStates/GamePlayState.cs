@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
+using TempNameGame.ConversationComponents;
 using TempNameGame.TileEngine;
 
 namespace TempNameGame.State.GameStates
@@ -100,6 +102,24 @@ namespace TempNameGame.State.GameStates
             _camera.LockToSprite(_map, _player.Sprite, Game1.ScreenRectangle);
             _player.Sprite.Update(gameTime);
 
+            if (InputHandler.CheckKeyReleased(Keys.Space) || InputHandler.CheckKeyReleased(Keys.Enter))
+            {
+                foreach (var key in _map.Characters.Keys)
+                {
+                    var c = CharacterManager.Instance.GetCharacter(key);
+                    var distance = Vector2.Distance(_player.Sprite.Center, c.Sprite.Center);
+
+                    if (!(Math.Abs(distance) < 72f)) continue;
+
+                    var conversationState =
+                        (IConversationState) _game.Services.GetService(typeof(IConversationState));
+                    _manager.PushState((ConversationState) conversationState, _currentPlayerIndex);
+                    conversationState.SetConversation(_player, c);
+                    conversationState.StartConversation();
+                }
+            }
+
+
             base.Update(gameTime);
         }
 
@@ -130,8 +150,13 @@ namespace TempNameGame.State.GameStates
             _map.FillBuilding();
             _map.FillDecoration();
 
+            ConversationManager.CreateConversations(_game);
+
             var teacherOne = Character.FromString(_game, "Lance,teacherone,WalkDown,teacherone");
             var teacherTwo = PCharacter.FromString(_game, "Marissa,teachertwo,WalkDown,teachertwo");
+
+            teacherOne.SetConversation("LanceHello");
+            teacherTwo.SetConversation("MarissaHello");
 
             _game.CharacterManager.AddCharacter("teacherone", teacherOne);
             _game.CharacterManager.AddCharacter("teachertwo", teacherTwo);
