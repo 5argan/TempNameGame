@@ -38,6 +38,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Characters\AICharacter.cs" />
+    <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\ICharacter.cs" />
     <Compile Include="Util\InputHandler.cs" />
     <Compile Include="Util\MenuComponent.cs" />
     <Compile Include="Game1.cs" />

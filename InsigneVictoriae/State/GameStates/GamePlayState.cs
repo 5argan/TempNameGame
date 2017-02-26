@@ -19,7 +19,7 @@ namespace InsigneVictoriae.State.GameStates
         Engine _engine = new Engine(Game1.ScreenRectangle, 64, 64);
         private TileMap _map;
         private Camera _camera;
-        //private Player _player;
+
         public GamePlayState(Game game) : base(game)
         {
             game.Services.AddService(typeof(IGamePlayState), this);
@@ -42,89 +42,12 @@ namespace InsigneVictoriae.State.GameStates
                 var temp = Matrix.Invert(_camera.Transformation);
                 var temp2 = new Vector2(InputHandler.MouseState.X, InputHandler.MouseState.Y);
                 var clickedPosition = Vector2.Transform(temp2, temp);
-                //MessageBox.Show($"{(int)(clickedPosition.X / Engine.TileWidth)}, {(int)(clickedPosition.Y / Engine.TileHeight)}");
             }
 
             var motion = Vector2.Zero;
-            const int padding = 8;
-
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.A))
-            {
-                motion.X -= 1;
-                //_player.Sprite.CurrentAnimation = AnimationKey.WalkLeft;
-            }
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.D))
-            {
-                motion.X += 1;
-                //_player.Sprite.CurrentAnimation = AnimationKey.WalkRight;
-            }
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.W))
-            {
-                motion.Y -= 1;
-                //_player.Sprite.CurrentAnimation = AnimationKey.WalkUp;
-            }
-            if (InputHandler.KeyboardState.IsKeyDown(Keys.S))
-            {
-                motion.Y += 1;
-                //_player.Sprite.CurrentAnimation = AnimationKey.WalkDown;
-            }
-
-
-            if (motion != Vector2.Zero)
-            {
-                motion.Normalize();
-                //motion *= _player.Speed*(float) gameTime.ElapsedGameTime.TotalSeconds;
-
-                /*var pRect = new Rectangle(
-                    (int) _player.Sprite.Position.X + (int) motion.X + padding,
-                    (int) _player.Sprite.Position.Y + (int) motion.Y + padding,
-                    Engine.TileWidth - padding,
-                    Engine.TileHeight - padding);*/
-
-                /*foreach (var key in _map.Characters.Keys)
-                {
-                    var r = new Rectangle(
-                        _map.Characters[key].X*Engine.TileWidth + padding,
-                        _map.Characters[key].Y*Engine.TileHeight + padding,
-                        Engine.TileWidth - padding,
-                        Engine.TileHeight - padding);
-
-                    if (!pRect.Intersects(r)) continue;
-                    motion = Vector2.Zero;
-                    break;
-                }*/
-
-                /*var newPosition = _player.Sprite.Position + motion;
-
-                _player.Sprite.Position = newPosition;
-                _player.Sprite.IsAnimating = true;
-                _player.Sprite.LockToMap(new Point(_map.WidthInPixels, _map.HeightInPixels));*/
-            }
-            else
-            {
-                /*_player.Sprite.IsAnimating = false;*/
-            }
 
             /*_camera.LockToSprite(_map, _player.Sprite, Game1.ScreenRectangle);
             _player.Sprite.Update(gameTime);*/
-
-            if (InputHandler.CheckKeyReleased(Keys.Space) || InputHandler.CheckKeyReleased(Keys.Enter))
-            {
-                /*foreach (var key in _map.Characters.Keys)
-                {
-                    var c = CharacterManager.Instance.GetCharacter(key);
-                    var distance = Vector2.Distance(_player.Sprite.Center, c.Sprite.Center);
-
-                    if (!(Math.Abs(distance) < 72f)) continue;
-
-                    var conversationState =
-                        (IConversationState) _game.Services.GetService(typeof(IConversationState));
-                    _manager.PushState((ConversationState) conversationState, _currentPlayerIndex);
-                    conversationState.SetConversation(_player, c);
-                    conversationState.StartConversation();
-                }*/
-            }
-
 
             base.Update(gameTime);
         }

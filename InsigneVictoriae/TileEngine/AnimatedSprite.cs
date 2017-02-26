@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TempNameGame.TileEngine;
 
-namespace TempNameGame.TileEngine
+namespace InsigneVictoriae.TileEngine
 {
     public enum AnimationKey
     {
