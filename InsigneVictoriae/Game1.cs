@@ -3,7 +3,6 @@ using InsigneVictoriae.State.GameStates;
 using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TempNameGame.TileEngine;
 
 namespace InsigneVictoriae
 {
@@ -12,25 +11,21 @@ namespace InsigneVictoriae
     /// </summary>
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
 
-        private readonly GameStateManager _gameStateManager;
-        //private readonly AvatarManager _avatarManager;
-
-        private readonly IIntroScreenState _introScreenState;
-        private readonly IMainMenuState _mainMenuState;
-        private readonly IGamePlayState _gamePlayState;
 
         public SpriteBatch SpriteBatch { get; private set; }
 
         public static Rectangle ScreenRectangle { get; private set; }
         
-        public GameStateManager GameStateManager => _gameStateManager;
-        //public AvatarManager AvatarManager => _avatarManager;
+        public GameStateManager GameStateManager { get; }
+        
 
-        public IIntroScreenState IntroScreenState => _introScreenState;
-        public IMainMenuState MainMenuState => _mainMenuState;
-        public IGamePlayState GamePlayState => _gamePlayState;
+        public IIntroScreenState IntroScreenState { get; }
+
+        public IMainMenuState MainMenuState { get; }
+
+        public IGamePlayState GamePlayState { get; }
 
 
         public Game1()
@@ -43,16 +38,16 @@ namespace InsigneVictoriae
             _graphics.PreferredBackBufferWidth = ScreenRectangle.Width;
             _graphics.PreferredBackBufferHeight = ScreenRectangle.Height;
 
-            _gameStateManager = new GameStateManager(this);
-            Components.Add(_gameStateManager);
+            GameStateManager = new GameStateManager(this);
+            Components.Add(GameStateManager);
 
             IsMouseVisible = true;
 
-            _introScreenState = new IntroScreenState(this);
-            _mainMenuState = new MainMenuState(this);
-            _gamePlayState = new GamePlayState(this);
+            IntroScreenState = new IntroScreenState(this);
+            MainMenuState = new MainMenuState(this);
+            GamePlayState = new GamePlayState(this);
 
-            _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
+            GameStateManager.ChangeState((IntroScreenState)IntroScreenState, PlayerIndex.One);
         }
 
         /// <summary>
