@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace TempNameGame.TileEngine
+namespace InsigneVictoriae.TileEngine
 {
     public class TileSet
     {

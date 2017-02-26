@@ -10,7 +10,14 @@ namespace InsigneVictoriae.Characters
         AnimatedSprite Sprite { get; }
         Vector2 Position { get; }
         int MovementRange { get; }
+        int Health { get; }
+        int CurrentHealth { get; set; }
+        int BaseAttack { get; }
+        int BaseDefense { get; }
+        int AttackRange { get; }
 
         bool MoveToTile(int x, int y);
+        void Attack(ICharacter target);
+        bool IsAlive();
     }
 }

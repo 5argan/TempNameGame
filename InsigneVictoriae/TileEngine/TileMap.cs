@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using InsigneVictoriae.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,8 +12,6 @@ namespace InsigneVictoriae.TileEngine
         [ContentSerializer] private readonly int _mapWidth;
         [ContentSerializer] private readonly int _mapHeight;
         
-        //private readonly CharacterManager _characterManager;
-
         [ContentSerializer]
         public string MapName { get; private set; }
 
@@ -32,7 +31,7 @@ namespace InsigneVictoriae.TileEngine
         public TileLayer DecorationLayer { get; set; }
 
         [ContentSerializer]
-        public LogicLayer LogicLayer { get; set; }
+        public CharacterLayer CharacterLayer { get; set; }
 
         public int MapWidth => _mapWidth;
         public int MapHeight => _mapHeight;
@@ -160,6 +159,11 @@ namespace InsigneVictoriae.TileEngine
             }
 
             spriteBatch.End();*/
+        }
+
+        public ICharacter GetCharacterAt(int x, int y)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

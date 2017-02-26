@@ -103,7 +103,7 @@ namespace InsigneVictoriae.TileEngine
 
             _destination = new Rectangle(0, 0, Engine.TileWidth, Engine.TileHeight);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transform);
             for (var y = _min.Y; y < _max.Y; y++)
             {
                 _destination.Y = y*Engine.TileHeight;

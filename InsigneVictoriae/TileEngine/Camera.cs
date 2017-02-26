@@ -1,8 +1,6 @@
-﻿using System;
-using InsigneVictoriae.TileEngine;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace TempNameGame.TileEngine
+namespace InsigneVictoriae.TileEngine
 {
     public class Camera
     {
@@ -21,7 +19,9 @@ namespace TempNameGame.TileEngine
             set { _speed = MathHelper.Clamp(value, 1f, 16f); }
         }
 
-        public Matrix Transformation => Matrix.CreateTranslation(new Vector3(-Position, 0f));
+        public Matrix Transform => Matrix.CreateTranslation(new Vector3(-Position, 0f));
+
+        public Matrix InverseTransform => Matrix.Invert(Transform);
 
         public Camera()
         {

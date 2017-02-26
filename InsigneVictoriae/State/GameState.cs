@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using TempNameGame.State;
 
 namespace InsigneVictoriae.State
 {

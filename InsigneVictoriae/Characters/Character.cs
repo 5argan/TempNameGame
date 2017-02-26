@@ -12,6 +12,11 @@ namespace InsigneVictoriae.Characters
         public AnimatedSprite Sprite { get; }
         public Vector2 Position => _position;
         public int MovementRange { get; }
+        public int Health { get; }
+        public int CurrentHealth { get; set; }
+        public int BaseAttack { get; }
+        public int BaseDefense { get; }
+        public int AttackRange { get; }
 
         public Character(Vector2 position, AnimatedSprite sprite, int movementRange)
         {
@@ -29,5 +34,16 @@ namespace InsigneVictoriae.Characters
             _position.Y = y;
             return true;
         }
+
+        public void Attack(ICharacter target)
+        {
+            target.CurrentHealth -= BaseAttack - target.BaseDefense;
+
+            if (target.IsAlive())
+                CurrentHealth -= target.BaseAttack - BaseDefense;
+        }
+
+        public bool IsAlive()
+            => CurrentHealth > 0;
     }
 }

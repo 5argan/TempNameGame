@@ -1,9 +1,10 @@
 ﻿using System;
-using InsigneVictoriae.TileEngine;
+using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TempNameGame.TileEngine;
 
-namespace TempNameGame.TileEngine
+namespace InsigneVictoriae.TileEngine
 {
     public class Engine
     {
@@ -32,7 +33,7 @@ namespace TempNameGame.TileEngine
 
         public static Point VectorToCell(Vector2 position)
             => new Point((int) position.X/TileWidth, (int) position.Y/TileHeight);
-
+        
         public void SetMap(TileMap newMap)
         {
             if (newMap == null)

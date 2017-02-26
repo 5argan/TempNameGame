@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using TempNameGame.State;
 
 namespace InsigneVictoriae.State
 {
