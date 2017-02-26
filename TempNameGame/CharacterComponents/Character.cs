@@ -16,7 +16,7 @@ namespace TempNameGame.CharacterComponents
 
         public string Name { get; private set; }
         public AnimatedSprite Sprite { get; private set; }
-        public Avatar BattleAvatar { get; }
+        public Avatar BattleAvatar { get; private set; }
         public Avatar GiveAvatar { get; }
 
         public string Conversation { get; private set; }
@@ -45,10 +45,13 @@ namespace TempNameGame.CharacterComponents
             var texture = game.Content.Load<Texture2D>(@"CharacterSprites\" + parts[1]);
             character.Sprite = new AnimatedSprite(texture, _game.playerAnimations);
             AnimationKey key;
-            if (!Enum.TryParse(parts[2], true, out key))
-                key = AnimationKey.WalkDown;
+            Enum.TryParse(parts[2], true, out key);
+
             character.Sprite.CurrentAnimation = key;
             character.Conversation = parts[3];
+
+            character.BattleAvatar = AvatarManager.GetAvatar(parts[4].ToLowerInvariant());
+
 
             return character;
         }

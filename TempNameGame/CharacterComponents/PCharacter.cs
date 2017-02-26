@@ -51,11 +51,15 @@ namespace TempNameGame.CharacterComponents
             character.Sprite = new AnimatedSprite(texture, _game.playerAnimations);
 
             AnimationKey key;
-            if (!Enum.TryParse(parts[2], true, out key))
-                key = AnimationKey.WalkDown;
+            Enum.TryParse(parts[2], true, out key);
             character.Sprite.CurrentAnimation = key;
 
             character.Conversation = parts[3];
+
+            for (var i = 4; i < 10; i++)
+            {
+                character._avatars[i - 4] = AvatarManager.GetAvatar(parts[i].ToLowerInvariant());
+            }
 
             return character;
         }
