@@ -5,12 +5,12 @@ namespace TempNameGame.AvatarComponents
 {
     public class MoveManager
     {
-        private static Dictionary<string, IMove> allMoves = new Dictionary<string, IMove>();
+        private static readonly Dictionary<string, IMove> allMoves = new Dictionary<string, IMove>();
         public static Random Random { get; } = new Random();
 
         public static void FillMoves()
         {
-
+            AddMove(new Tackle());
         }
 
         public static IMove GetMove(string name) => 

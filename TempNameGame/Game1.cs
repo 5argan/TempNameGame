@@ -92,6 +92,9 @@ namespace TempNameGame
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            AvatarComponents.MoveManager.FillMoves();
+            AvatarComponents.AvatarManager.FromFile(@".\Data\avatars.csv", Content);
         }
 
         /// <summary>
