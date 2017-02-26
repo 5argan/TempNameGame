@@ -8,6 +8,7 @@ namespace TempNameGame.CharacterComponents
     public interface ICharacter
     {
         string Name { get; }
+        string Conversation { get; }
         AnimatedSprite Sprite { get; }
         Avatar BattleAvatar { get; }
         Avatar GiveAvatar { get; }
