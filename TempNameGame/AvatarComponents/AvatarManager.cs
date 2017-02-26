@@ -7,7 +7,7 @@ namespace TempNameGame.AvatarComponents
 {
     public class AvatarManager
     {
-        public static Dictionary<string, Avatar> AvatarList { get; }
+        public static Dictionary<string, Avatar> AvatarList { get; } = new Dictionary<string, Avatar>();
 
         public static void AddAvatar(string name, Avatar avatar)
         {

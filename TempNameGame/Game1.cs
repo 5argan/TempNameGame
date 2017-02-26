@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using TempNameGame.AvatarComponents;
 using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.State;
@@ -20,6 +21,7 @@ namespace TempNameGame
 
         private readonly GameStateManager _gameStateManager;
         private readonly CharacterManager _characterManager;
+        //private readonly AvatarManager _avatarManager;
 
         private readonly IIntroScreenState _introScreenState;
         private readonly IMainMenuState _mainMenuState;
@@ -33,6 +35,7 @@ namespace TempNameGame
         public Dictionary<AnimationKey, Animation> playerAnimations { get; } = new Dictionary<AnimationKey, Animation>();
         public GameStateManager GameStateManager => _gameStateManager;
         public CharacterManager CharacterManager => _characterManager;
+        //public AvatarManager AvatarManager => _avatarManager;
 
         public IIntroScreenState IntroScreenState => _introScreenState;
         public IMainMenuState MainMenuState => _mainMenuState;
@@ -61,6 +64,7 @@ namespace TempNameGame
             
             _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
             _characterManager = CharacterManager.Instance;
+            //_avatarManager = AvatarManager.FromFile()
         }
 
         /// <summary>

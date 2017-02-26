@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Windows.Forms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using TempNameGame.AvatarComponents;
 using TempNameGame.CharacterComponents;
 using TempNameGame.Components;
 using TempNameGame.ConversationComponents;
 using TempNameGame.PlayerComponents;
 using TempNameGame.TileEngine;
+using Keys = Microsoft.Xna.Framework.Input.Keys;
 
 namespace TempNameGame.State.GameStates
 {
@@ -40,6 +41,14 @@ namespace TempNameGame.State.GameStates
 
         public override void Update(GameTime gameTime)
         {
+            if (InputHandler.CheckMouseReleased(MouseButton.Left))
+            {
+                var temp = Matrix.Invert(_camera.Transformation);
+                var temp2 = new Vector2(InputHandler.MouseState.X, InputHandler.MouseState.Y);
+                var clickedPosition = Vector2.Transform(temp2, temp);
+                MessageBox.Show($"{(int)(clickedPosition.X / Engine.TileWidth)}, {(int)(clickedPosition.Y / Engine.TileHeight)}");
+            }
+
             var motion = Vector2.Zero;
             const int padding = 8;
 
@@ -158,8 +167,8 @@ namespace TempNameGame.State.GameStates
 
             ConversationManager.CreateConversations(_game);
 
-            var teacherOne = Character.FromString(_game, "Lance,teacherone,WalkDown,teacherone");
-            var teacherTwo = PCharacter.FromString(_game, "Marissa,teachertwo,WalkDown,teachertwo");
+            var teacherOne = Character.FromString(_game, "Lance,teacherone,WalkDown,teacherone,dark");
+            var teacherTwo = PCharacter.FromString(_game, "Marissa,teachertwo,WalkDown,teachertwo,light");
 
             teacherOne.SetConversation("LanceHello");
             teacherTwo.SetConversation("MarissaHello");

@@ -58,7 +58,10 @@ namespace TempNameGame.CharacterComponents
 
             for (var i = 4; i < 10; i++)
             {
-                character._avatars[i - 4] = AvatarManager.GetAvatar(parts[i].ToLowerInvariant());
+                if (i <= parts.GetUpperBound(0))
+                {
+                    character._avatars[i - 4] = AvatarManager.GetAvatar(parts[i].ToLowerInvariant());
+                }
             }
 
             return character;
