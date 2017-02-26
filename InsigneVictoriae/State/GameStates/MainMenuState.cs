@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using InsigneVictoriae.Util;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TempNameGame.Components;
+using TempNameGame.State;
+using TempNameGame.State.GameStates;
 
-namespace TempNameGame.State.GameStates
+namespace InsigneVictoriae.State.GameStates
 {
     public interface IMainMenuState : IGameState
     {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using TempNameGame.State;
 
-namespace TempNameGame.State
+namespace InsigneVictoriae.State
 {
     public class GameStateManager : GameComponent, IStateManager
     {

@@ -2,16 +2,16 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using TempNameGame.CharacterComponents;
+using TempNameGame.TileEngine;
 
-namespace TempNameGame.TileEngine
+namespace InsigneVictoriae.TileEngine
 {
     public class TileMap
     {
         [ContentSerializer] private readonly int _mapWidth;
         [ContentSerializer] private readonly int _mapHeight;
         
-        private readonly CharacterManager _characterManager;
+        //private readonly CharacterManager _characterManager;
 
         [ContentSerializer]
         public string MapName { get; private set; }
@@ -50,7 +50,7 @@ namespace TempNameGame.TileEngine
             Characters = new Dictionary<string, Point>();
             TileSet = tileSet;
             MapName = mapName;
-            _characterManager = CharacterManager.Instance;
+            //_characterManager = CharacterManager.Instance;
         }
 
         public TileMap(TileSet tileSet, TileLayer groundLayer, TileLayer edgeLayer, TileLayer buildingLayer,
@@ -146,7 +146,7 @@ namespace TempNameGame.TileEngine
 
         public void DrawCharacters(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
+            /*spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
 
             foreach (var key in Characters.Keys)
             {
@@ -159,7 +159,7 @@ namespace TempNameGame.TileEngine
                 c.Sprite.Draw(gameTime, spriteBatch);
             }
 
-            spriteBatch.End();
+            spriteBatch.End();*/
         }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace TempNameGame.Components
+namespace InsigneVictoriae.Util
 {
     public enum MouseButton
     {

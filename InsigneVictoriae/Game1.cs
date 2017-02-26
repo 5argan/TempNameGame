@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using InsigneVictoriae.State;
+using InsigneVictoriae.State.GameStates;
+using InsigneVictoriae.Util;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using TempNameGame.TileEngine;
 
 namespace InsigneVictoriae
 {
@@ -9,13 +12,47 @@ namespace InsigneVictoriae
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager _graphics;
+
+        private readonly GameStateManager _gameStateManager;
+        //private readonly AvatarManager _avatarManager;
+
+        private readonly IIntroScreenState _introScreenState;
+        private readonly IMainMenuState _mainMenuState;
+        private readonly IGamePlayState _gamePlayState;
+
+        public SpriteBatch SpriteBatch { get; private set; }
+
+        public static Rectangle ScreenRectangle { get; private set; }
+        
+        public GameStateManager GameStateManager => _gameStateManager;
+        //public AvatarManager AvatarManager => _avatarManager;
+
+        public IIntroScreenState IntroScreenState => _introScreenState;
+        public IMainMenuState MainMenuState => _mainMenuState;
+        public IGamePlayState GamePlayState => _gamePlayState;
+
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            ScreenRectangle = new Rectangle(0, 0, 1280, 720);
+
+            _graphics.PreferredBackBufferWidth = ScreenRectangle.Width;
+            _graphics.PreferredBackBufferHeight = ScreenRectangle.Height;
+
+            _gameStateManager = new GameStateManager(this);
+            Components.Add(_gameStateManager);
+
+            IsMouseVisible = true;
+
+            _introScreenState = new IntroScreenState(this);
+            _mainMenuState = new MainMenuState(this);
+            _gamePlayState = new GamePlayState(this);
+
+            _gameStateManager.ChangeState((IntroScreenState)_introScreenState, PlayerIndex.One);
         }
 
         /// <summary>
@@ -26,7 +63,7 @@ namespace InsigneVictoriae
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Components.Add(new InputHandler(this));
 
             base.Initialize();
         }
@@ -37,10 +74,7 @@ namespace InsigneVictoriae
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -49,7 +83,6 @@ namespace InsigneVictoriae
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
         }
 
         /// <summary>
@@ -59,11 +92,6 @@ namespace InsigneVictoriae
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -74,10 +102,8 @@ namespace InsigneVictoriae
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
+
     }
 }
