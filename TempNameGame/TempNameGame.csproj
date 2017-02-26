@@ -47,6 +47,7 @@
     <Compile Include="Components\InputHandler.cs" />
     <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="ConversationComponents\Conversation.cs" />
+    <Compile Include="ConversationComponents\ConversationManager.cs" />
     <Compile Include="ConversationComponents\GameScene.cs" />
     <Compile Include="ConversationComponents\SceneOption.cs" />
     <Compile Include="Game1.cs" />
