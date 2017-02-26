@@ -3,7 +3,6 @@ using InsigneVictoriae.TileEngine;
 using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using TempNameGame.State.GameStates;
 using TempNameGame.TileEngine;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 

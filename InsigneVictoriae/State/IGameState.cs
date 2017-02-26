@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace TempNameGame.State
+namespace InsigneVictoriae.State
 {
     public interface IGameState
     {

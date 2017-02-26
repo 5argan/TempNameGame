@@ -3,8 +3,6 @@ using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using TempNameGame.State;
-using TempNameGame.State.GameStates;
 
 namespace InsigneVictoriae.State.GameStates
 {

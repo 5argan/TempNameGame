@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using TempNameGame.State;
-using TempNameGame.State.GameStates;
 
 namespace InsigneVictoriae.State.GameStates
 {
@@ -34,7 +33,7 @@ namespace InsigneVictoriae.State.GameStates
 
             var texture = Game.Content.Load<Texture2D>(@"Misc\wooden-button");
 
-            string[] menuItems = {"NEW GAME", "CONTINUE", "OPTIONS", "EXIT"};
+            string[] menuItems = {"Gameplay Map", "WIP: Combat", "WIP: World Map", "EXIT"};
 
             _menuComponent = new MenuComponent(_spriteFont, texture, menuItems);
 
@@ -68,9 +67,9 @@ namespace InsigneVictoriae.State.GameStates
                 {
                     InputHandler.FlushInput();
 
-                    _game.GamePlayState.LoadExistingGame();
+                    /*_game.GamePlayState.LoadExistingGame();
                     _game.GamePlayState.StartGame();
-                    _manager.PushState((GamePlayState)_game.GamePlayState, _currentPlayerIndex);
+                    _manager.PushState((GamePlayState)_game.GamePlayState, _currentPlayerIndex);*/
                 }
                 else if (_menuComponent.SelectedIndex == 2)
                 {

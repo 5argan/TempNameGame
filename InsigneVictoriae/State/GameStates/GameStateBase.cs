@@ -1,8 +1,7 @@
 ﻿using System;
-using InsigneVictoriae;
 using Microsoft.Xna.Framework;
 
-namespace TempNameGame.State.GameStates
+namespace InsigneVictoriae.State.GameStates
 {
     public class GameStateBase : GameState
     {

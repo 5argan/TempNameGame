@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Storage;
+using TempNameGame.State;
 
-namespace TempNameGame.State
+namespace InsigneVictoriae.State
 {
     public abstract partial class GameState : DrawableGameComponent, IGameState
     {
