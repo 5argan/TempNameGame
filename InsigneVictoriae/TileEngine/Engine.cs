@@ -8,7 +8,9 @@ namespace InsigneVictoriae.TileEngine
 {
     public class Engine
     {
+/*
         private static float scrollSpeed = 500f;
+*/
         public static Rectangle ViewPortRectangle { get; set; }
 
         public static int TileWidth { get; set; } = 32;

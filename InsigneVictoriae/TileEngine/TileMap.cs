@@ -29,10 +29,7 @@ namespace InsigneVictoriae.TileEngine
 
         [ContentSerializer]
         public TileLayer DecorationLayer { get; set; }
-
-        [ContentSerializer]
-        public CharacterLayer CharacterLayer { get; set; }
-
+        
         public int MapWidth => _mapWidth;
         public int MapHeight => _mapHeight;
         
