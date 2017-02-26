@@ -35,8 +35,8 @@ namespace InsigneVictoriae.TileEngine
 
         public int MapWidth => _mapWidth;
         public int MapHeight => _mapHeight;
-
-        public Dictionary<string, Point> Characters { get; }
+        
+        public List<ICharacter> Characters { get; }
         public int WidthInPixels => MapWidth * Engine.TileWidth;
         public int HeightInPixels => MapHeight * Engine.TileHeight;
 
@@ -46,10 +46,9 @@ namespace InsigneVictoriae.TileEngine
 
         private TileMap(TileSet tileSet, string mapName) : this()
         {
-            Characters = new Dictionary<string, Point>();
+            Characters = new List<ICharacter>();
             TileSet = tileSet;
             MapName = mapName;
-            //_characterManager = CharacterManager.Instance;
         }
 
         public TileMap(TileSet tileSet, TileLayer groundLayer, TileLayer edgeLayer, TileLayer buildingLayer,
@@ -131,6 +130,8 @@ namespace InsigneVictoriae.TileEngine
             EdgeLayer?.Update(gameTime);
             BuildingLayer?.Update(gameTime);
             DecorationLayer?.Update(gameTime);
+
+            Characters.RemoveAll(c => !c.IsAlive());
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
@@ -145,23 +146,19 @@ namespace InsigneVictoriae.TileEngine
 
         public void DrawCharacters(GameTime gameTime, SpriteBatch spriteBatch, Camera camera)
         {
-            /*spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transformation);
-
-            foreach (var key in Characters.Keys)
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.Transform);
+            
+            foreach (var character in Characters)
             {
-                var c = _characterManager.GetCharacter(key);
-                if (c == null) continue;
-
-                c.Sprite.Position.X = Characters[key].X*Engine.TileWidth;
-                c.Sprite.Position.Y = Characters[key].Y*Engine.TileHeight;
-
-                c.Sprite.Draw(gameTime, spriteBatch);
+                character.Sprite.Position.X = character.Position.X*Engine.TileWidth;
+                character.Sprite.Position.Y = character.Position.Y * Engine.TileWidth;
+                character.Sprite.Draw(gameTime, spriteBatch);
             }
 
-            spriteBatch.End();*/
+            spriteBatch.End();
         }
 
-        public ICharacter GetCharacterAt(int x, int y)
+        public ICharacter GetCharacterAtCell(int x, int y)
         {
             throw new System.NotImplementedException();
         }

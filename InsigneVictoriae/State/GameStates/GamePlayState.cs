@@ -1,4 +1,5 @@
-﻿using InsigneVictoriae.TileEngine;
+﻿using InsigneVictoriae.Characters;
+using InsigneVictoriae.TileEngine;
 using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,10 +18,12 @@ namespace InsigneVictoriae.State.GameStates
     {
         private TileMap _map;
         private Camera _camera;
+        private ICharacter _selectedCharacter;
 
         public GamePlayState(Game game) : base(game)
         {
             game.Services.AddService(typeof(IGamePlayState), this);
+            _selectedCharacter = null;
         }
 
         public override void Initialize()
@@ -37,8 +40,14 @@ namespace InsigneVictoriae.State.GameStates
             if (InputHandler.CheckMouseReleased(MouseButton.Left))
             {
                 var clickedPosition = MapMouseToCell();
-                //MessageBox.Show(clickedPosition.ToString());
-                var character = _map.GetCharacterAt((int) clickedPosition.X, (int) clickedPosition.Y);
+                var target = _map.GetCharacterAtCell((int)clickedPosition.X, (int)clickedPosition.Y);
+
+                if (_selectedCharacter == null)
+                    _selectedCharacter = target;
+                else if (target == null)
+                    _selectedCharacter.MoveToTile((int) clickedPosition.X, (int) clickedPosition.Y);
+                else
+                    _selectedCharacter.Attack(target);
             }
 
             _camera.LockCamera(_map, Game1.ScreenRectangle);

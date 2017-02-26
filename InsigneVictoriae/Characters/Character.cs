@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using InsigneVictoriae.TileEngine;
 using Microsoft.Xna.Framework;
 using TempNameGame.TileEngine;
@@ -37,10 +38,12 @@ namespace InsigneVictoriae.Characters
 
         public void Attack(ICharacter target)
         {
+            Debug.Fail("Implement attack range/positioning");
             target.CurrentHealth -= BaseAttack - target.BaseDefense;
 
             if (target.IsAlive())
                 CurrentHealth -= target.BaseAttack - BaseDefense;
+
         }
 
         public bool IsAlive()
