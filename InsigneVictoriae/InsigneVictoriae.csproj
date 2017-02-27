@@ -38,7 +38,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Characters\AICharacter.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Characters\CharacterManager.cs" />
     <Compile Include="Characters\ICharacter.cs" />
