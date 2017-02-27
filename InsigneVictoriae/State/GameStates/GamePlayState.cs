@@ -1,4 +1,6 @@
-﻿using InsigneVictoriae.Characters;
+﻿using InsigneVictoriae;
+using InsigneVictoriae.Characters;
+using InsigneVictoriae.State.GameStates;
 using InsigneVictoriae.TileEngine;
 using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
@@ -7,6 +9,8 @@ using TempNameGame.TileEngine;
 
 namespace InsigneVictoriae.State.GameStates
 {
+    
+
     public interface IGamePlayState
     {
         void SetUpNewGame();
@@ -19,6 +23,7 @@ namespace InsigneVictoriae.State.GameStates
         private TileMap _map;
         private Camera _camera;
         private ICharacter _selectedCharacter;
+        private Engine _engine = new Engine(Game1.ScreenRectangle, 64, 64);
 
         public GamePlayState(Game game) : base(game)
         {

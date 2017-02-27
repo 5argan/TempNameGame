@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using InsigneVictoriae.Characters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -9,6 +10,7 @@ namespace InsigneVictoriae.TileEngine
 {
     public class TileMap
     {
+        //private readonly Engine _engine = new Engine(Camera.vi1);
         [ContentSerializer] private readonly int _mapWidth;
         [ContentSerializer] private readonly int _mapHeight;
         
@@ -155,9 +157,7 @@ namespace InsigneVictoriae.TileEngine
             spriteBatch.End();
         }
 
-        public ICharacter GetCharacterAtCell(int x, int y)
-        {
-            throw new System.NotImplementedException();
-        }
+        public ICharacter GetCharacterAtCell(int x, int y) =>
+            Characters.FirstOrDefault(c => (int)c.Position.X == x && (int)c.Position.Y == y);
     }
 }
