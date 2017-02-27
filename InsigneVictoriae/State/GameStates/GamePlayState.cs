@@ -23,7 +23,7 @@ namespace InsigneVictoriae.State.GameStates
         private TileMap _map;
         private Camera _camera;
         private ICharacter _selectedCharacter;
-        private Engine _engine = new Engine(Game1.ScreenRectangle, 64, 64);
+        private TileEngine.Engine _engine = new TileEngine.Engine(Game1.ScreenRectangle, 64, 64);
 
         public GamePlayState(Game game) : base(game)
         {
@@ -44,6 +44,7 @@ namespace InsigneVictoriae.State.GameStates
         {
             if (InputHandler.CheckMouseReleased(MouseButton.Left))
             {
+                //todo: defer input handling to combat map
                 var clickedPosition = MapMouseToCell();
                 var target = _map.GetCharacterAtCell((int)clickedPosition.X, (int)clickedPosition.Y);
 
@@ -63,7 +64,7 @@ namespace InsigneVictoriae.State.GameStates
         private Vector2 MapMouseToCell()
         {
             var mousePos = new Vector2(InputHandler.MouseState.X, InputHandler.MouseState.Y);
-            var temp = Engine.VectorToCell(mousePos).ToVector2();
+            var temp = TileEngine.Engine.VectorToCell(mousePos).ToVector2();
             var temp2 =  Vector2.Transform(temp,_camera.InverseTransform);
             return temp2;
         }
