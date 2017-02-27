@@ -10,6 +10,7 @@ namespace InsigneVictoriae.Characters
     {
         private Vector2 _position;
 
+        public int PlayerId { get; }
         public AnimatedSprite Sprite { get; }
         public Vector2 Position => _position;
         public int MovementRange { get; }
@@ -19,11 +20,12 @@ namespace InsigneVictoriae.Characters
         public int BaseDefense { get; }
         public int AttackRange { get; }
 
-        public Character(Vector2 position, AnimatedSprite sprite, int movementRange)
+        public Character(Vector2 position, AnimatedSprite sprite, int movementRange, int playerId)
         {
             _position = position;
             Sprite = sprite;
             MovementRange = movementRange;
+            PlayerId = playerId;
         }
 
         public bool MoveToTile(int x, int y)
@@ -36,14 +38,21 @@ namespace InsigneVictoriae.Characters
             return true;
         }
 
-        public void Attack(ICharacter target)
+        /// <summary>
+        /// Deal damage to the target character according to attack and defense values.
+        /// </summary>
+        /// <param name="target">The character being attacked.</param>
+        /// <returns>true if the attack was successful, false otherwise</returns>
+        public bool Attack(ICharacter target)
         {
-            Debug.Fail("Implement attack range/positioning");
             target.CurrentHealth -= BaseAttack - target.BaseDefense;
+            
+            return true;
+        }
 
-            if (target.IsAlive())
-                CurrentHealth -= target.BaseAttack - BaseDefense;
-
+        public bool Support(ICharacter target)
+        {
+            throw new NotImplementedException();
         }
 
         public bool IsAlive()

@@ -7,6 +7,7 @@ namespace InsigneVictoriae.Characters
 {
     public interface ICharacter
     {
+        int PlayerId { get; }
         AnimatedSprite Sprite { get; }
         Vector2 Position { get; }
         int MovementRange { get; }
@@ -17,7 +18,8 @@ namespace InsigneVictoriae.Characters
         int AttackRange { get; }
 
         bool MoveToTile(int x, int y);
-        void Attack(ICharacter target);
+        bool Attack(ICharacter target);
+        bool Support(ICharacter target);
         bool IsAlive();
     }
 }

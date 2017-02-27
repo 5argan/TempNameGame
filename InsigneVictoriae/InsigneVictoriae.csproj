@@ -40,7 +40,9 @@
   <ItemGroup>
     <Compile Include="Characters\AICharacter.cs" />
     <Compile Include="Characters\Character.cs" />
+    <Compile Include="Characters\CharacterManager.cs" />
     <Compile Include="Characters\ICharacter.cs" />
+    <Compile Include="CombatMap\CombatMap.cs" />
     <Compile Include="Util\InputHandler.cs" />
     <Compile Include="Util\MenuComponent.cs" />
     <Compile Include="Game1.cs" />
