@@ -30,7 +30,7 @@ namespace InsigneVictoriae.TileEngine
         private float _speed = 200.0f;
         private readonly Texture2D _texture;
 
-        public AnimationKey CurrentAnimation { get; set; }
+        public AnimationKey CurrentAnimation { get; set; } = AnimationKey.WalkLeft;
         public bool IsAnimating { get; set; }
         public int Width => _animations[CurrentAnimation].FrameWidth;
         public int Height => _animations[CurrentAnimation].FrameHeight;

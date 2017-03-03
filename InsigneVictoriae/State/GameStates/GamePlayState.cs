@@ -1,4 +1,5 @@
-﻿using InsigneVictoriae;
+﻿using System.Collections.Generic;
+using InsigneVictoriae;
 using InsigneVictoriae.Characters;
 using InsigneVictoriae.State.GameStates;
 using InsigneVictoriae.TileEngine;
@@ -92,6 +93,7 @@ namespace InsigneVictoriae.State.GameStates
             var decor = new TileLayer(200, 200);
 
             _map = new TileMap(set, background, edge, building, decor, "test-map");
+            _map.Characters.Add(new Character(new Vector2(1, 1), new AnimatedSprite(_game.Content.Load<Texture2D>(@"CharacterSprites\teacherone"), _game.playerAnimations), 2, 1));
             _map.FillEdges();
             _map.FillBuilding();
             _map.FillDecoration();

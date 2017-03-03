@@ -1,8 +1,11 @@
-﻿using InsigneVictoriae.State;
+﻿using System.Collections.Generic;
+using InsigneVictoriae.State;
 using InsigneVictoriae.State.GameStates;
+using InsigneVictoriae.TileEngine;
 using InsigneVictoriae.Util;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using TempNameGame.TileEngine;
 
 namespace InsigneVictoriae
 {
@@ -13,7 +16,7 @@ namespace InsigneVictoriae
     {
         private readonly GraphicsDeviceManager _graphics;
 
-
+        public Dictionary<AnimationKey, Animation> playerAnimations { get; } = new Dictionary<AnimationKey, Animation>();
         public SpriteBatch SpriteBatch { get; private set; }
 
         public static Rectangle ScreenRectangle { get; private set; }
@@ -59,6 +62,15 @@ namespace InsigneVictoriae
         protected override void Initialize()
         {
             Components.Add(new InputHandler(this));
+
+            var animation = new Animation(3, 64, 64, 0, 0);
+            playerAnimations.Add(AnimationKey.WalkDown, animation);
+            animation = new Animation(3, 64, 64, 0, 64);
+            playerAnimations.Add(AnimationKey.WalkLeft, animation);
+            animation = new Animation(3, 64, 64, 0, 128);
+            playerAnimations.Add(AnimationKey.WalkRight, animation);
+            animation = new Animation(3, 64, 64, 0, 192);
+            playerAnimations.Add(AnimationKey.WalkUp, animation);
 
             base.Initialize();
         }
